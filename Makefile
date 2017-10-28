@@ -1,13 +1,16 @@
 CFLAGS=-O3 -std=c11 -g -fopenmp
 CXXFLAGS=-O3 -std=c++11 -g -fopenmp
 LDFLAGS=-fopenmp
-ARCHIVES=libintegrate.a libfunctions.a libgen.a 
+ARCHIVES=libintegrate.a libfunctions.a libgen.a
 LD=g++
 
 all: reduce mergesort prefixsum numint numint_seq prefixsum_seq
 
 reduce: reduce.o
 	$(LD) $(LDFLAGS) reduce.o $(ARCHIVES) -o reduce
+
+bubblesort: bubblesort.o
+	$(LD) $(LDFLAGS) bubblesort.o $(ARCHIVES) -o bubblesort
 
 mergesort: mergesort.o
 	$(LD) $(LDFLAGS) mergesort.o $(ARCHIVES) -o mergesort
@@ -55,4 +58,3 @@ assignment-openmp-loop.tgz: approx.cpp \
 
 clean:
 	-rm *.o
-
