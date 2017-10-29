@@ -4,34 +4,26 @@ LDFLAGS=-fopenmp
 ARCHIVES=libintegrate.a libfunctions.a libgen.a
 LD=g++
 
-all: reduce mergesort prefixsum numint numint_seq prefixsum_seq
+all: reduce mergesort bubblesort lcs approx
 
 reduce: reduce.o
 	$(LD) $(LDFLAGS) reduce.o $(ARCHIVES) -o reduce
 
 bubblesort: bubblesort.o
 	$(LD) $(LDFLAGS) bubblesort.o $(ARCHIVES) -o bubblesort
+	
+lcs: lcs.o
+	$(LD) $(LDFLAGS) lcs.o $(ARCHIVES) -o lcs
 
 mergesort: mergesort.o
 	$(LD) $(LDFLAGS) mergesort.o $(ARCHIVES) -o mergesort
 
-prefixsum: prefixsum.o
-	$(LD) $(LDFLAGS) prefixsum.o $(ARCHIVES) -o prefixsum
-
-prefixsum_seq: prefixsum_seq.o
-	$(LD) $(LDFLAGS) prefixsum_seq.o $(ARCHIVES) -o prefixsum_seq
-
-numint: numint.o
-	$(LD) $(LDFLAGS) numint.o $(ARCHIVES) -o numint
-
-numint_seq: numint_seq.o
-	$(LD) $(LDFLAGS) numint_seq.o $(ARCHIVES) -o numint_seq
 
 libfunctions.a: functions.o
 	ar rcs libfunctions.a functions.o
 
 libintegrate.a: sequential_lib.o
-	ar rcs libintegrate.a sequential_lib.o
+		ar rcs libintegrate.a sequential_lib.o
 
 libgen.a: gen_lib.o
 	ar rcs libgen.a gen_lib.o
